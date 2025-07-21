@@ -1,4 +1,4 @@
-# Project Specification: Bicameral Cognitive Agent (Codename: BEACON)
+# Project Specification: Bicameral Cognitive Agent (Codename: BACON)
 
 **B**icameral
 **A**gent with  
