@@ -1,7 +1,6 @@
-# 🧠 Project Specification: Bicameral Cognitive Agent (Codename: BEACON)
+# Project Specification: Bicameral Cognitive Agent (Codename: BEACON)
 
-**B**icameral  
-**E**xecutive  
+**B**icameral
 **A**gent with  
 **C**ompute-aware  
 **O**rchestration and  
