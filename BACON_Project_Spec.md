@@ -1,7 +1,7 @@
 # Project Specification: Bicameral Cognitive Agent (Codename: BACON)
 
-**B**icameral
-**A**gent with  
+**B**icameral   
+**A**gent with   
 **C**ompute-aware  
 **O**rchestration and  
 **N**avigation
