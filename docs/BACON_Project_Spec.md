@@ -75,7 +75,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 ### Phase 1: Core Loop and Skeleton
 - [x] Build Executive ⇄ Worker interaction pattern (ReAct + LangGraph)
 - [x] Integrate tool-use via LangChain or custom function router
-- [ ] Approval mechanism for tool execution (e.g., "Do you want to run this code?") In a tool's definition (tools.yaml), add a flag like requires_approval: true.. When the agent wants to use such a tool (e.g., execute_code, spend_money), it pauses and waits for user confirmation via the CLI. 
+- [x] Approval mechanism for tool execution (e.g., "Do you want to run this code?") In a tool's definition (tools.yaml), add a flag like requires_approval: true.. When the agent wants to use such a tool (e.g., execute_code, spend_money), it pauses and waits for user confirmation via the CLI. 
 - [x] Code Executor sandboxing (Docker container for code_executor.py)
 - [ ] Implement code synthesis with subprocess feedback
 - [x] Add working memory (in-memory context history)

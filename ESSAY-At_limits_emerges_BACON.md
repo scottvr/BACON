@@ -294,4 +294,4 @@ BACON is an attempt to formalize that shift. Not a pipe dream, not a manifesto �
 
 So no, the future won’t be summoned by a single monolithic model hoarding IQ points in a vacuum. It will emerge from toolchains, feedback loops, shell scripts, schedulers, semantic graphs, and little acts of architectural stubbornness.
 
-We don’t need to wait for godlike intelligence to descend from the heavens. We can boot it — one bacon strip at a time.
+We don’t need to wait for godlike intelligence to descend from the heavens. We can boot it — one piece of BACON at a time.
