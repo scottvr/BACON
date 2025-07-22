@@ -1,16 +1,18 @@
-import os
-import uuid
-import json
-from datetime import datetime
+from pathlib import Path
 from typing import Dict, Optional
+import os
+from datetime import datetime, timezone
+import json
+import uuid
 
+# crumb: output_manager.py
 class OutputManager:
     def __init__(self, base_dir: str = "output"):
         self.base_dir = Path(base_dir)
         self.base_dir.mkdir(parents=True, exist_ok=True)
 
     def create_task_dir(self, task_name: str = "") -> Path:
-        timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         task_id = f"{timestamp}_{uuid.uuid4().hex[:6]}"
         safe_name = task_name.lower().replace(" ", "_")[:40]
         task_dir = self.base_dir / f"{safe_name}_{task_id}"

@@ -16,5 +16,5 @@ Bicameral Agent with Compute-aware Orchestration and Navigation
 2. **Run the Agent:**
 
    ```bash
-   python -m bacon.main
+   python -m bacon.main "Your task description here"
    ```
