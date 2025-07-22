@@ -82,11 +82,15 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [ ] Add system metric polling (RAM, CPU, disk, GPU if available)
 - [ ] Feed metrics into planning decisions
 - [ ] Allow Executive to adapt plan based on constraints
+- [ ] Integrate observability via LangSmith traces and OpenTelemetry metrics for substrate and tool feedback
 
 ### Phase 3: Persistent Memory + Reflection
 - [ ] Plug in vector DB for long-term recall (via RAG)
 - [ ] Enable self-reflection after tasks (“What did I learn?”)
 - [ ] Store toolchains, patterns, and successful code snippets
+- [ ] Track Prompt strategy variants(e.g., executive tone, persona conditioning)
+- [ ] Track model-specific tuning quirks
+- [ ] Memory slotting/Recall strategies (e.g., by task type, tool used, or outcome)
 
 ### Phase 4: Interface and Orchestration
 - [ ] Configurable task flows via YAML
@@ -139,3 +143,33 @@ beacon/
 - Agent-to-agent collaboration
 - Plugin manager for sandboxed skill/module extension
 - Trust and introspection layer (self-audit)
+
+## 10. Usage Interface
+
+CLI Example:
+```bash
+python -m bacon.main "Sort a 100GB CSV with 8GB RAM limit"
+```
+
+Python API Example:
+```python
+from bacon.interface import BaconAgent
+
+agent = BaconAgent(config_path="langgraph_bacon.yaml")
+result = agent.run("Sort a 100GB CSV under 8GB RAM", constraints={"RAM": "8GB"})
+```
+
+Input:
+Natural language task, optional constraints dictionary.
+
+Output:
+A dictionary including:
+
+Plan steps
+
+Tool invocations
+
+Code artifacts (optional paths)
+
+Final task state/messages
+
