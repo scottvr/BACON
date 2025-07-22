@@ -5,7 +5,13 @@ def worker(state):
     # Later, this will come from the planner.
     code_to_execute = "print('Executing code from the worker!')"
     
-    executor = CodeExecutor()
-    result = executor.execute(code=code_to_execute)
+    print(f"Code to execute:\n---\n{code_to_execute}\n---")
+    approval = input("Do you want to run this code? (yes/no): ")
     
-    return {"messages": [f"tool_output: {result}"]}
+    if approval.lower() == 'yes':
+        executor = CodeExecutor()
+        result = executor.execute(code=code_to_execute)
+        return {"messages": [f"tool_output: {result}"]}
+    else:
+        return {"messages": ["tool_output: execution skipped by user."]}
+
