@@ -15,7 +15,7 @@ class AgentState(TypedDict):
 
 class BaconAgent:
     # Python API for the BACON agent
-    def __init__(self, config_path: str = "langgraph_bacon.yaml", recursion_limit: int = 15):
+    def __init__(self, config_path: str = "bacon/langgraph_bacon.yaml", recursion_limit: int = 15):
         self.config_path = config_path
         self.recursion_limit = recursion_limit
         self._load_graph()

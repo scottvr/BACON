@@ -118,16 +118,19 @@ When the agent starts, it can check for an incomplete run and offer to resume fr
 
 ## 📄 7. Example Use Case (Test Scenario)
 
-> Task: “Sort a 100GB CSV file on a machine with 4 cores and 8GB RAM without OOM errors.”
+Task: “Sort a 100GB CSV file on a machine with 4 cores and 8GB RAM without OOM errors.”
 
-1. Executive plans high-level strategy (chunk, sort, merge).
-2. Worker generates chunking script and estimates RAM.
-3. Substrate awareness checks available memory.
-4. Plan is revised to process in smaller slices.
-5. Code is written, tested, executed.
-6. Result is validated, memory released.
-7. Plan, lessons, and tools are saved to long-term memory.
+Goal: "Sort the 100GB CSV file."
 
+Constraints: Max RAM usage of 7GB, completion within 30 minutes.
+
+**BACON's Process:**
+
+- **Plan:** The Meta-Controller selects a "sort-large-file" strategy. The default is an external merge sort.
+- **Substrate Query:** It queries the Substrate Monitor: "Available RAM = 8GB; Available Cores = 4."
+- **Constraint Analysis:** It calculates that a naive implementation might spike memory usage above the 7GB constraint. It refines the plan: "Use a memory-mapped file or process the file in N chunks of size S, where S is calculated to keep peak RAM usage below 7GB."
+- **Action:** The Code Synthesis worker generates a Python script using pandas with a specific chunksize.
+- **Monitoring & Adaptation:** During execution, the Substrate Monitor reports that I/O is the bottleneck. The Meta-Controller might revise the plan again to launch parallel processes to handle I/O and computation concurrently, if the cores allow.
 ---
 
 ## 📚 8. Repo Structure (Proposed)
@@ -176,7 +179,7 @@ Python API Example:
 ```python
 from bacon.interface import BaconAgent
 
-agent = BaconAgent(config_path="langgraph_bacon.yaml")
+agent = BaconAgent(config_path="bacon/langgraph_bacon.yaml")
 result = agent.run("Sort a 100GB CSV under 8GB RAM", constraints={"RAM": "8GB"})
 ```
 

@@ -5,7 +5,7 @@ from bacon.util.output_manager import OutputManager
 def main():
     parser = argparse.ArgumentParser(description="BACON Agent CLI")
     parser.add_argument("task", help="Task description for the agent")
-    parser.add_argument("--config", default="langgraph_bacon.yaml", help="Path to LangGraph YAML config")
+    parser.add_argument("--config", default="bacon/langgraph_bacon.yaml", help="Path to LangGraph YAML config")
     parser.add_argument("--recursion", type=int, default=15, help="Recursion limit for the agent")
     args = parser.parse_args()
 
