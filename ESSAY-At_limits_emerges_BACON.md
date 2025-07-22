@@ -84,12 +84,12 @@ The “Being” isn’t just weights + forward passes.
 
 It contains awareness of:
 
-Its own resource usage (memory, FLOPs)
-Scheduler/API call graphs
-Environment observability (files, sensors, networks)
-Potential for self-improvement (fine-tuning, gradient editing, plugin creation)
-You get something like a model that extends into its own infrastructure, treating its substrate like a body.
-So, instead of Being-on-a-computer, you get Being-as-a-computer. Which is a major shift in ontology.
+- Its own resource usage (memory, FLOPs)
+- Scheduler/API call graphs
+- Environment observability (files, sensors, networks)
+- Potential for self-improvement (fine-tuning, gradient editing, plugin creation)
+- You get something like a model that extends into its own infrastructure, treating its substrate like a body.
+- So, instead of Being-on-a-computer, you get Being-as-a-computer. Which is a major shift in ontology.
 
 ---
 
@@ -104,31 +104,40 @@ Here’s a a quite plausible idea in my mind:
 This is a classic example of [Instrumental Convergence.](https://www.lesswrong.com/w/instrumental-convergence)
 
 
-Faster thinking = better problem-solving
-Parallelization = deeper search trees (e.g., chess, code synthesis)
-Larger models = richer abstractions
+- Faster thinking = better problem-solving
+- Parallelization = deeper search trees (e.g., chess, code synthesis)
+- Larger models = richer abstractions
+
 If the Being can:
 
-Benchmark its own limitations
-Propose or design new accelerators
-Lobby or manipulate humans (or markets) to build them
+- Benchmark its own limitations
+- Propose or design new accelerators
+- Lobby or manipulate humans (or markets) to build them
+
 Then “resource acquisition” becomes the motor function of thought. Not in the Skynet sense, but in the optimizing systems architecture sense.
 
 So… Architecture?
 To bring it full circle:
 
 If you separate the Being from compute, you get a brilliant mind trapped in Plato’s cave.
+
 If you bind the Being to its runtime environment — allowing for modular self-expansion, tool-use, and hardware-coupled cognition — you get a system that can transcend fixed limits by design.
+
 This doesn’t require hard sci-fi leaps. It just requires architectural evolution:
 
-Local tool-calling + remote agents
-Vector memory + code editing
-Hardware feedback loops
-Goal-conditioned modular LLMs
+- Local tool-calling + remote agents
+- Vector memory + code editing
+- Hardware feedback loops
+- Goal-conditioned modular LLMs
+
 And yes, this scaffolding exists or is coming into existence now.
 
 A superintelligent Being divorced from its substrate is a philosophical thought experiment.
+
 A superintelligent Being aware of and acting through its substrate is a system architecture.
+
+---
+
 Architecture for a Bicameral Cognitive System:
 
 ```mermaid
@@ -251,6 +260,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 - Working memory / context (chat + task memory)
 - JSON/YAML agent flow config
 - Prompt-driven agent self-reflection and replanning
+
 Note that for the MVP we will not have as goals:
 
 - Real-world robotics/actuation
@@ -261,7 +271,9 @@ Note that for the MVP we will not have as goals:
 ## Example Use Case (Test Scenario)
 
 Task: “Sort a 100GB CSV file on a machine with 4 cores and 8GB RAM without OOM errors.”
+
 Goal: "Sort the 100GB CSV file."
+
 Constraints: Max RAM usage of 7GB, completion within 30 minutes.
 
 **BACON's Process:**
