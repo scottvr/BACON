@@ -262,7 +262,9 @@ Note that for the MVP we will not have as goals:
 ## Example Use Case (Test Scenario)
 
 Task: “Sort a 100GB CSV file on a machine with 4 cores and 8GB RAM without OOM errors.”
+
 Goal: "Sort the 100GB CSV file."
+
 Constraints: Max RAM usage of 7GB, completion within 30 minutes.
 
 **BACON's Process:**
