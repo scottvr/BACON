@@ -48,7 +48,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 
 | Component                | Tech Stack / Notes                                               |
 |--------------------------|------------------------------------------------------------------|
-| Executive Cortex         | OpenAI / Claude + ReAct + DSPy / LangGraph planner              |
+| High-Level Planner / Meta-Controller  | OpenAI / Claude + ReAct + DSPy / LangGraph planner              |
 | Worker / Actuator Agent  | Code executor (OpenInterpreter, subprocess), API tools          |
 | Orchestration Layer      | LangGraph, FastAPI for LLM calls + function routing             |
 | Tool Invocation Layer    | LangChain Tools, CLI runner, HTTP plugin runner                 |
@@ -75,6 +75,8 @@ Existing LLM agents are monolithic or brittle. They lack:
 ### Phase 1: Core Loop and Skeleton
 - [x] Build Executive ⇄ Worker interaction pattern (ReAct + LangGraph)
 - [x] Integrate tool-use via LangChain or custom function router
+- [ ] Approval mechanism for tool execution (e.g., "Do you want to run this code?") In a tool's definition (tools.yaml), add a flag like requires_approval: true.. When the agent wants to use such a tool (e.g., execute_code, spend_money), it pauses and waits for user confirmation via the CLI. 
+- [ ] Code Executor sandboxing (Docker container for code_executor.py)
 - [ ] Implement code synthesis with subprocess feedback
 - [ ] Add working memory (in-memory context history)
 
@@ -83,6 +85,9 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [ ] Feed metrics into planning decisions
 - [ ] Allow Executive to adapt plan based on constraints
 - [ ] Integrate observability via LangSmith traces and OpenTelemetry metrics for substrate and tool feedback
+- [ ] The agent should track the cost of its LLM calls (input_tokens * price + output_tokens * price).
+- [ ] A task can be given a max_budget constraint (e.g., constraints={"RAM": "8GB", "budget": "$5.00"}).
+- [ ] The Executive planner should be aware of the remaining context window size and use summarization or context compression techniques to avoid failures on long-running tasks.
 
 ### Phase 3: Persistent Memory + Reflection
 - [ ] Plug in vector DB for long-term recall (via RAG)
@@ -91,12 +96,24 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [ ] Track Prompt strategy variants(e.g., executive tone, persona conditioning)
 - [ ] Track model-specific tuning quirks
 - [ ] Memory slotting/Recall strategies (e.g., by task type, tool used, or outcome)
+- [ ] snapshot the entire state of the LangGraph execution graph, not just the memory.
+After each step, save the current state (including all node inputs/outputs, memory, and the current position in the graph) to a database like SQLite or a file.
+When the agent starts, it can check for an incomplete run and offer to resume from the last saved state. This makes the system resilient to failures.
 
 ### Phase 4: Interface and Orchestration
 - [ ] Configurable task flows via YAML
 - [ ] Web CLI or terminal-based interface
 - [ ] Optional streamlit or web dashboard
 
+
+### Evaluation and Testing Framework
+- [ ] Create a simple test suite of tasks (a "BACON-bench"). These could be a dozen scenarios like the CSV sorting example.
+- [ ] Define success metrics for each test (e.g., task completion, resource usage, cost, number of steps).
+- [ ] Run this evaluation suite automatically after major changes to measure progress and catch regressions. You can even use a cheaper, faster LLM (like Haiku or Llama 3 8B) to "judge" the quality of the final output.
+
+###  Dynamic Tool & Prompt Library
+- After a successful task, the Reflection step should identify if any generated code or sequence of tool calls is useful.
+- The agent could then be prompted to write a docstring and function signature for that code, and automatically save it as a new tool in its library (e.g., as a new .py file or a new entry in a tool database). This is the foundation for the "self-upgrading toolchain" listed in future enhancements and is achievable within the MVP.
 ---
 
 ## 📄 7. Example Use Case (Test Scenario)
@@ -132,6 +149,10 @@ beacon/
 ├── config/
 │   ├── agents.yaml          # plan/worker routing logic
 │   └── tools.yaml           # registered tools
+|── prompts/
+│   └── executive_prompts.md # LLM prompts
+|   └── self_reflection.md   # LLM prompts 
+|   └── code_generator.md    # LLM prompts
 └── README.md
 ```
 
