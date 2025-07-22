@@ -33,13 +33,13 @@ Existing LLM agents are monolithic or brittle. They lack:
 
 ## ✅ 3. Goals (MVP)
 
-- [ ] Plan/Act separation (Executive ⇄ Worker)
-- [ ] Modular orchestration layer (LangGraph or custom)
+- [x] Plan/Act separation (Executive ⇄ Worker)
+- [x] Modular orchestration layer (LangGraph or custom)
 - [ ] Tool execution layer (CLI, Python, APIs)
 - [ ] Substrate feedback (psutil, Prometheus, etc.)
 - [ ] Long-term memory (vector DB or document store)
 - [ ] Working memory / context (chat + task memory)
-- [ ] JSON/YAML agent flow config
+- [x] JSON/YAML agent flow config
 - [ ] Prompt-driven agent self-reflection and replanning
 
 ---
@@ -73,8 +73,8 @@ Existing LLM agents are monolithic or brittle. They lack:
 ## 🛠 6. Development Roadmap (MVP)
 
 ### Phase 1: Core Loop and Skeleton
-- [ ] Build Executive ⇄ Worker interaction pattern (ReAct + LangGraph)
-- [ ] Integrate tool-use via LangChain or custom function router
+- [x] Build Executive ⇄ Worker interaction pattern (ReAct + LangGraph)
+- [x] Integrate tool-use via LangChain or custom function router
 - [ ] Implement code synthesis with subprocess feedback
 - [ ] Add working memory (in-memory context history)
 

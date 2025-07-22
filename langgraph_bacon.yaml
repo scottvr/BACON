@@ -102,7 +102,5 @@ edges:
     to: worker
   - from: substrate_sense
     to: feedback_loop
-  - from: feedback_loop
-    to: planner
 
 entry_point: planner
