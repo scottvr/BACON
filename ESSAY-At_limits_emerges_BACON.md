@@ -251,6 +251,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 - Working memory / context (chat + task memory)
 - JSON/YAML agent flow config
 - Prompt-driven agent self-reflection and replanning
+
 Note that for the MVP we will not have as goals:
 
 - Real-world robotics/actuation
