@@ -29,7 +29,7 @@ class BaconAgent:
             "planner": planner,
             "worker": worker,
             "feedback_loop": feedback_loop,
-            "memory_router": memory_router,
+            "memory_router": lambda state: state,
             "retriever": retriever,
             "substrate_sense": substrate_sense,
         }
