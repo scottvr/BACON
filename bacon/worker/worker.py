@@ -1,12 +1,7 @@
-# crumb: worker\worker.py
-from bacon.worker.code_executor import run_python_code
+
+import subprocess
 
 def worker(state):
-    """
-    Worker node function.
-    """
-    print("Executing worker node.")
-    # For now, we'll just execute a simple python script.
-    code = "print('Hello from the worker!')"
-    result = run_python_code(code)
-    return {"messages": [result]}
+    # Hardcoded tool execution
+    result = subprocess.run(["echo", "hello world"], capture_output=True, text=True)
+    return {"messages": [f"tool_output: {result.stdout.strip()}"]}

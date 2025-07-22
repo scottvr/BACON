@@ -1,8 +1,3 @@
-# crumb: exec\planner.py
-
 def planner(state):
-    """
-    Planner node function.
-    """
-    print("Executing planner node.")
-    return {"messages": ["Planner executed."]}
+    # Hardcoded plan for the simple loop
+    return {"messages": ["plan: run echo command"]}

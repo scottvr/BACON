@@ -38,7 +38,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [ ] Tool execution layer (CLI, Python, APIs)
 - [ ] Substrate feedback (psutil, Prometheus, etc.)
 - [ ] Long-term memory (vector DB or document store)
-- [ ] Working memory / context (chat + task memory)
+- [x] Working memory / context (chat + task memory)
 - [x] JSON/YAML agent flow config
 - [ ] Prompt-driven agent self-reflection and replanning
 
@@ -78,7 +78,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [ ] Approval mechanism for tool execution (e.g., "Do you want to run this code?") In a tool's definition (tools.yaml), add a flag like requires_approval: true.. When the agent wants to use such a tool (e.g., execute_code, spend_money), it pauses and waits for user confirmation via the CLI. 
 - [ ] Code Executor sandboxing (Docker container for code_executor.py)
 - [ ] Implement code synthesis with subprocess feedback
-- [ ] Add working memory (in-memory context history)
+- [x] Add working memory (in-memory context history)
 
 ### Phase 2: Substrate Awareness
 - [ ] Add system metric polling (RAM, CPU, disk, GPU if available)

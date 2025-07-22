@@ -1,0 +1,7 @@
+task: test task
+plan: run echo command
+task: test task
+plan: run echo command
+tool_output: hello world
+substrate: RAM=4GB
+halt
