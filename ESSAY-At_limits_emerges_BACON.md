@@ -84,12 +84,12 @@ The “Being” isn’t just weights + forward passes.
 
 It contains awareness of:
 
-Its own resource usage (memory, FLOPs)
-Scheduler/API call graphs
-Environment observability (files, sensors, networks)
-Potential for self-improvement (fine-tuning, gradient editing, plugin creation)
-You get something like a model that extends into its own infrastructure, treating its substrate like a body.
-So, instead of Being-on-a-computer, you get Being-as-a-computer. Which is a major shift in ontology.
+- Its own resource usage (memory, FLOPs)
+- Scheduler/API call graphs
+- Environment observability (files, sensors, networks)
+- Potential for self-improvement (fine-tuning, gradient editing, plugin creation)
+- You get something like a model that extends into its own infrastructure, treating its substrate like a body.
+- So, instead of Being-on-a-computer, you get Being-as-a-computer. Which is a major shift in ontology.
 
 ---
 
