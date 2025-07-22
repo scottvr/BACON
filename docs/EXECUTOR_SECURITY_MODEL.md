@@ -85,12 +85,12 @@ This is the most critical part. The docker run command must be constructed with 
 --cap-drop=ALL: Least Privilege. Drops all Linux capabilities (e.g., killing other processes, changing network settings).
 
 ### 📋 6. Implementation Roadmap
-[ ] Create the Dockerfile: Define the Dockerfile and a requirements.txt with essential libraries. Build the image locally as bacon-executor:latest.
+[x] Create the Dockerfile: Define the Dockerfile and a requirements.txt with essential libraries. Build the image locally as bacon-executor:latest.
 
-[ ] Develop the CodeExecutor module: Write the Python class that handles the full lifecycle described in section 3. It will use the docker-py library or subprocess to construct and run the docker run command.
+[x] Develop the CodeExecutor module: Write the Python class that handles the full lifecycle described in section 3. It will use the docker-py library or subprocess to construct and run the docker run command.
 
-[ ] Implement I/O handling: Ensure the module can correctly place input files into the temporary directory and retrieve output files after execution.
+[x] Implement I/O handling: Ensure the module can correctly place input files into the temporary directory and retrieve output files after execution.
 
-[ ] Add error and timeout handling: Wrap the container execution in a timeout and properly parse different exit codes to determine success, code error, or system error.
+[x] Add error and timeout handling: Wrap the container execution in a timeout and properly parse different exit codes to determine success, code error, or system error.
 
-[ ] Integrate as a Tool: Register the CodeExecutor as a tool that the Executive Planner can invoke. The requires_approval: true flag should be used here by default.
+[x] Integrate as a Tool: Register the CodeExecutor as a tool that the Executive Planner can invoke. The requires_approval: true flag should be used here by default.

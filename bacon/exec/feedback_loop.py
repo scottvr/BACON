@@ -3,6 +3,8 @@ def feedback_loop(state):
     """
     Feedback loop node function.
     """
-    if "tool_output: hello world" in state["messages"]:
-        return {"messages": ["halt"]}
+    # Temporary halt condition for testing the executor
+    for message in state["messages"]:
+        if isinstance(message, str) and message.startswith("tool_output"):
+            return {"messages": ["halt"]}
     return {"messages": ["continue"]}
