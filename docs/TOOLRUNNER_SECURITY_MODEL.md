@@ -73,14 +73,14 @@ The tool definition is central to its security. The config should be structured 
 ```
 
 ### 📋 6. Implementation Roadmap
-[ ] Define the tools.yaml schema and create Pydantic models for validation.
+[x] Define the tools.yaml schema and create Pydantic models for validation.
 
-[ ] Implement the YAML parser that loads and registers the allowlisted tools at startup.
+[x] Implement the YAML parser that loads and registers the allowlisted tools at startup.
 
-[ ] Build the ToolRunner class with the core logic for validation, HITL approval, and dispatching to handlers.
+[x] Build the ToolRunner class with the core logic for validation, HITL approval, and dispatching to handlers.
 
-[ ] Write the api_handler and cli_handler functions, ensuring they implement the secure practices outlined above (credential loading, shell=False, etc.).
+[x] Write the api_handler and cli_handler functions, ensuring they implement the secure practices outlined above (credential loading, shell=False, etc.).
 
-[ ] Develop parameter sanitization functions, especially for file paths to prevent directory traversal.
+[x] Develop parameter sanitization functions, especially for file paths to prevent directory traversal.
 
-[ ] Test with adversarial inputs, such as trying to inject commands (my-query; ls -la) or traverse directories (../../etc/passwd) to ensure the protections work as expected.
+[x] Test with adversarial inputs, such as trying to inject commands (my-query; ls -la) or traverse directories (../../etc/passwd) to ensure the protections work as expected.

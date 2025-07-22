@@ -1,0 +1,26 @@
+
+tools:
+  - name: "search_web"
+    description: "Searches the web for a given query using the Brave Search API."
+    type: "api"
+    handler: "api_handler"
+    requires_approval: false
+    config:
+      api_key_env: "BRAVE_API_KEY"
+      base_url: "https://api.search.brave.com/res/v1/web/search"
+      params:
+        - name: "q"
+          type: "string"
+          required: true
+
+  - name: "read_file"
+    description: "Reads the content of a file from the current working directory."
+    type: "cli"
+    handler: "cli_handler"
+    requires_approval: true
+    config:
+      command: ["cat"]
+      params:
+        - name: "filename"
+          type: "filepath"
+          required: true
