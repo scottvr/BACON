@@ -1,5 +1,5 @@
 # BACON
-Bicameral Agent with Compute-aware Orchestration and Navigation
+[Bicameral Agent with Compute-aware Orchestration and Navigation](https://github.com/scottvr/BACON/blob/main/ESSAY-At_limits_emerges_BACON.md)
 
 ## Requirements
 - Python 3.12+
