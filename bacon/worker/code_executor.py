@@ -1,3 +1,4 @@
+# crumb: worker\code_executor.py
 import docker
 
 def run_python_code(code: str) -> str:

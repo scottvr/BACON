@@ -1,3 +1,4 @@
+# crumb: worker\worker.py
 from bacon.worker.code_executor import run_python_code
 
 def worker(state):
