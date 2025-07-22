@@ -1,6 +1,6 @@
 import argparse
 from bacon.interface import BaconAgent
-from bacon.utils.output_manager import OutputManager
+from bacon.util.output_manager import OutputManager
 
 def main():
     parser = argparse.ArgumentParser(description="BACON Agent CLI")
