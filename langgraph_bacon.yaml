@@ -1,0 +1,108 @@
+# YAML definition of the LangGraph-style flow for BACON: 
+# Bicameral Agent with Compute-aware Orchestration and Navigation
+
+nodes:
+  - id: planner
+    type: llm
+    description: High-level reasoning and task decomposition
+    model: openai:gpt-4
+    config:
+      temperature: 0.3
+      system_prompt: |
+        You are the Planner in a bicameral cognitive system. Your job is to:
+        - Interpret user goals
+        - Decompose them into subtasks
+        - Select tools or workers for each subtask
+        - React and replan based on environment feedback
+    middleware:
+      - observability_tracer
+
+  - id: memory_router
+    type: router
+    description: Context and memory dispatcher
+    inputs: [planner]
+    routes:
+      - condition: "task involves prior knowledge or examples"
+        target: retriever
+      - condition: "task is new"
+        target: worker
+    middleware:
+      - observability_tracer
+
+  - id: retriever
+    type: function
+    description: VectorDB-backed retrieval for RAG memory
+    inputs: [memory_router]
+    function: retrieve_context
+    config:
+      db: chroma
+      embedding_model: openai:embedding-ada-002
+    middleware:
+      - observability_tracer
+
+  - id: substrate_sense
+    type: function
+    description: Runtime awareness of system resource limits
+    inputs: [worker]
+    function: get_system_metrics
+    config:
+      library: psutil
+    middleware:
+      - observability_tracer
+
+  - id: worker
+    type: llm
+    description: Task executor using tools and generated code
+    model: openai:gpt-4
+    config:
+      temperature: 0.5
+      tools:
+        - name: code_exec
+          type: function
+          function: run_python_code
+        - name: http_get
+          type: function
+          function: perform_http_get
+        - name: cli_exec
+          type: function
+          function: run_cli_command
+    middleware:
+      - observability_tracer
+
+  - id: feedback_loop
+    type: llm
+    description: Self-reflection and replanning based on tool outputs and system state
+    model: openai:gpt-4
+    inputs: [substrate_sense, retriever]
+    config:
+      temperature: 0.2
+      system_prompt: |
+        You reflect on the result of the last action and current system state.
+        If the goal is not yet achieved, revise the plan or choose new tools.
+    middleware:
+      - observability_tracer
+
+  - id: observability_tracer
+    type: middleware
+    description: Trace LangGraph steps with LangSmith and OTel
+    config:
+      langsmith: true
+      opentelemetry: true
+
+edges:
+  - from: planner
+    to: memory_router
+  - from: memory_router
+    to: retriever
+  - from: memory_router
+    to: worker
+  - from: worker
+    to: substrate_sense
+  - from: retriever
+    to: worker
+  - from: substrate_sense
+    to: feedback_loop
+  - from: feedback_loop
+    to: planner
+
+entry_point: planner
