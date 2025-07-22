@@ -1,5 +1,6 @@
 import argparse
 from bacon.interface import BaconAgent
+from bacon.utils.output_manager import OutputManager
 
 def main():
     parser = argparse.ArgumentParser(description="BACON Agent CLI")
@@ -10,9 +11,18 @@ def main():
 
     agent = BaconAgent(config_path=args.config, recursion_limit=args.recursion)
     result = agent.run(args.task)
+
+    output_mgr = OutputManager()
+    task_dir = output_mgr.create_task_dir(task_name=args.task)
+    output_mgr.save_messages(task_dir, result["messages"])
+
+    # Optional: if your LLM produces a plan or code artifacts, save those here
+    # output_mgr.save_summary(task_dir, {"status": "complete", "task": args.task})
+
     print("=== BACON Agent Result ===")
     for msg in result["messages"]:
         print(msg)
+    print(f"Output saved to: {task_dir}")
 
 if __name__ == "__main__":
     main()
