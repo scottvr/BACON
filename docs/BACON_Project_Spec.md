@@ -52,7 +52,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 | Worker / Actuator Agent  | Code executor (OpenInterpreter, subprocess), API tools          |
 | Orchestration Layer      | LangGraph, FastAPI for LLM calls + function routing             |
 | Tool Invocation Layer    | LangChain Tools, CLI runner, HTTP plugin runner                 |
-| Substrate Awareness      | `psutil`, Prometheus client, custom sensors                     |
+| Substrate Awareness      | OTel, `psutil`, Prometheus client, custom sensors                     |
 | Working Memory           | LangChain memory, Redis or ephemeral JSON store                 |
 | Long-Term Memory         | Chroma / Weaviate / FAISS + metadata index                      |
 | RAG Engine               | LlamaIndex / DSPy / LangChain Retriever                         |
