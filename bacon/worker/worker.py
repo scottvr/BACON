@@ -9,10 +9,14 @@ def worker(state):
     runner = ToolRunner()
     result = runner.run_tool(
         tool_name, 
-        auto_approve=state.get("auto_approve", False), 
+        auto_approve=state.get("auto_approve", False),
+        work_dir=state.get("constraints", {}).get("work_dir", "."),
         **params
     )
     
     return {"messages": [f"tool_output: {result}"]}
+
+
+
 
 

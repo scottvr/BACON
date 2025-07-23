@@ -24,3 +24,18 @@ tools:
         - name: "filename"
           type: "filepath"
           required: true
+
+  - name: "write_file"
+    description: "Writes content to a file in the current working directory."
+    type: "cli"
+    handler: "cli_handler"
+    requires_approval: true
+    config:
+      command: ["tee"]
+      params:
+        - name: "filename"
+          type: "filepath"
+          required: true
+        - name: "content"
+          type: "string"
+          required: true

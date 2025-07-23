@@ -8,10 +8,15 @@ def main():
     parser.add_argument("--config", default="bacon/langgraph_bacon.yaml", help="Path to LangGraph YAML config")
     parser.add_argument("--recursion", type=int, default=15, help="Recursion limit for the agent")
     parser.add_argument("--auto-approve", action="store_true", help="Auto-approve all tool executions")
+    parser.add_argument("--work-dir", type=str, default=".", help="Working directory for the agent")
     args = parser.parse_args()
 
     agent = BaconAgent(config_path=args.config, recursion_limit=args.recursion)
-    result = agent.run(args.task, auto_approve=args.auto_approve)
+    result = agent.run(
+        args.task, 
+        auto_approve=args.auto_approve,
+        constraints={"work_dir": args.work_dir}
+    )
 
     output_mgr = OutputManager()
     task_dir = output_mgr.create_task_dir(task_name=args.task)
