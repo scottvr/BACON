@@ -30,7 +30,7 @@ So with ithe realization that nobody was going to read or respond to my comment,
 
 >Would the Being be able to convince anyone of anything? Would it be the best diplomat in history?
 
-Dynomight answers this with:
+Dynomight answers with this:
 
 >I suspect that if you decided to be open-minded, then the Being would probably be extremely persuasive. … Best guess: No idea.
 
