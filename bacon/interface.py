@@ -12,6 +12,7 @@ from bacon.substrate.substrate_sense import substrate_sense
 
 class AgentState(TypedDict):
     messages: Annotated[list, operator.add]
+    auto_approve: bool
 
 class BaconAgent:
     # Python API for the BACON agent
@@ -51,19 +52,19 @@ class BaconAgent:
         )
         self.workflow.add_conditional_edges(
             "feedback_loop",
-            lambda state: "planner" if state["messages"][-1] != "halt" else END,
+            lambda state: END if state["messages"][-1] == "halt" else "planner",
             {"planner": "planner", END: END}
         )
 
         self.graph = self.workflow.compile()
 
-    def run(self, task: str, constraints: dict = None) -> AgentState:
+    def run(self, task: str, constraints: dict = None, auto_approve: bool = False) -> AgentState:
         # Execute the agent on a given task and return the final state
         initial_messages = [f"task: {task}"]
         if constraints:
             for k, v in constraints.items():
                 initial_messages.append(f"{k}: {v}")
 
-        initial_state = {"messages": initial_messages}
+        initial_state = {"messages": initial_messages, "auto_approve": auto_approve}
         final_state = self.graph.invoke(initial_state, {"recursion_limit": self.recursion_limit})
         return final_state

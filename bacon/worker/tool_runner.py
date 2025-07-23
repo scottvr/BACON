@@ -19,13 +19,13 @@ class ToolRunner:
         # Return a dictionary for easy lookup
         return {tool.name: tool for tool in validated_config.tools}
 
-    def run_tool(self, tool_name: str, **kwargs):
+    def run_tool(self, tool_name: str, auto_approve: bool = False, **kwargs):
         if tool_name not in self.tools:
             return f"Error: Tool '{tool_name}' not found."
 
         tool = self.tools[tool_name]
 
-        if tool.requires_approval:
+        if tool.requires_approval and not auto_approve:
             print(f"Tool: {tool.name}")
             print(f"Description: {tool.description}")
             print(f"Parameters: {kwargs}")

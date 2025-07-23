@@ -7,7 +7,11 @@ def worker(state):
     params = {"filename": "test.txt"}
     
     runner = ToolRunner()
-    result = runner.run_tool(tool_name, **params)
+    result = runner.run_tool(
+        tool_name, 
+        auto_approve=state.get("auto_approve", False), 
+        **params
+    )
     
     return {"messages": [f"tool_output: {result}"]}
 

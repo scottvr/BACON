@@ -1,0 +1,4 @@
+{
+    "prompt": "Read the content of the file 'input.txt' and write it to 'output.txt'.",
+    "description": "A simple test of reading from one file and writing to another using available tools."
+}

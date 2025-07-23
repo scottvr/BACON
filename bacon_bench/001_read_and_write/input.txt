@@ -1,0 +1,2 @@
+This is the content of the input file.
+The agent should read this and write it to the output file.
