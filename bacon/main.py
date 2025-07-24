@@ -15,7 +15,7 @@ def main():
     result = agent.run(
         args.task, 
         auto_approve=args.auto_approve,
-        constraints={"work_dir": args.work_dir}
+        constraints={"work_dir": "output/runs/current_task"}
     )
 
     output_mgr = OutputManager()
