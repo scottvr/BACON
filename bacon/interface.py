@@ -14,6 +14,10 @@ class AgentState(TypedDict):
     messages: Annotated[list, operator.add]
     auto_approve: bool
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 class BaconAgent:
     # Python API for the BACON agent
     def __init__(self, config_path: str = "bacon/langgraph_bacon.yaml", recursion_limit: int = 15):
@@ -47,8 +51,8 @@ class BaconAgent:
 
         self.workflow.add_conditional_edges(
             "feedback_loop",
-            lambda state: END if state["messages"][-1] == "halt" else "planner",
-            {"planner": "planner", END: END}
+            lambda state: END,
+            {END: END}
         )
 
         self.graph = self.workflow.compile()
