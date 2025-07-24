@@ -34,10 +34,12 @@ class ToolRunner:
                 return "Tool execution skipped by user."
 
         # Dispatch to the correct handler
-        if tool.handler == "api_handler":
+        if tool.type == "api":
             return self.api_handler(tool, **kwargs)
-        elif tool.handler == "cli_handler":
-            return self.cli_handler(tool, **kwargs)
+        elif tool.type == "cli":
+            return self.cli_handler(tool, work_dir=work_dir, **kwargs)
+        elif tool.type == "function":
+            return self.function_handler(tool, **kwargs)
         else:
             return f"Error: Unknown handler '{tool.handler}' for tool '{tool_name}'."
 
@@ -113,6 +115,23 @@ class ToolRunner:
             return f"Error: Command not found: {command[0]}"
         except subprocess.CalledProcessError as e:
             return f"Error executing command: {e.stderr}"
+        except Exception as e:
+            return f"An unexpected error occurred: {e}"
+
+    def function_handler(self, tool, **kwargs):
+        # Dynamically import the function from the tools directory
+        try:
+            module = __import__(f"bacon.worker.tools.{tool.handler}", fromlist=[tool.handler])
+            func = getattr(module, tool.handler)
+
+            # Filter kwargs to only include parameters defined in the tool's config
+            func_kwargs = {p.name: kwargs[p.name] for p in tool.config.params if p.name in kwargs}
+
+            return func(**func_kwargs)
+        except ImportError:
+            return f"Error: Could not import module for tool '{tool.name}'."
+        except AttributeError:
+            return f"Error: Could not find function for tool '{tool.name}'."
         except Exception as e:
             return f"An unexpected error occurred: {e}"
 

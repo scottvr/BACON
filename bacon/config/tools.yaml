@@ -1,15 +1,13 @@
 
 tools:
-  - name: "search_web"
-    description: "Searches the web for a given query using the Brave Search API."
-    type: "api"
-    handler: "api_handler"
+  - name: "search"
+    description: "Searches the web for a given query using the Tavily API."
+    type: "function"
+    handler: "search"
     requires_approval: false
     config:
-      api_key_env: "BRAVE_API_KEY"
-      base_url: "https://api.search.brave.com/res/v1/web/search"
       params:
-        - name: "q"
+        - name: "query"
           type: "string"
           required: true
 

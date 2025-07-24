@@ -17,8 +17,8 @@ class ToolConfig(BaseModel):
 class ToolDefinition(BaseModel):
     name: str
     description: str
-    type: Literal["api", "cli"]
-    handler: Literal["api_handler", "cli_handler"]
+    type: Literal["api", "cli", "function"]
+    handler: str
     requires_approval: bool = False
     config: ToolConfig
 
