@@ -84,7 +84,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [x] Add system metric polling (RAM, CPU, disk, GPU if available)
 - [x] Feed metrics into planning decisions
 - [x] Allow Executive to adapt plan based on constraints
-- [ ] Integrate observability via LangSmith traces and OpenTelemetry metrics for substrate and tool feedback
+- [x] Integrate observability via LangSmith traces and OpenTelemetry metrics for substrate and tool feedback
 - [ ] The agent should track the cost of its LLM calls (input_tokens * price + output_tokens * price).
 - [ ] A task can be given a max_budget constraint (e.g., constraints={"RAM": "8GB", "budget": "$5.00"}).
 - [ ] The Executive planner should be aware of the remaining context window size and use summarization or context compression techniques to avoid failures on long-running tasks.

@@ -4,6 +4,9 @@ import os
 import subprocess
 from pathlib import Path
 from bacon.worker.tool_defs import ToolsConfig
+from opentelemetry import trace
+
+tracer = trace.get_tracer(__name__)
 
 class ToolRunner:
     def __init__(self, tool_config_path: str = "bacon/config/tools.yaml"):
@@ -20,26 +23,28 @@ class ToolRunner:
         return {tool.name: tool for tool in validated_config.tools}
 
     def run_tool(self, tool_name: str, auto_approve: bool = False, work_dir: str = ".", **kwargs):
-        if tool_name not in self.tools:
-            return f"Error: Tool '{tool_name}' not found."
+        with tracer.start_as_current_span("run_tool") as span:
+            span.set_attribute("tool_name", tool_name)
+            if tool_name not in self.tools:
+                return f"Error: Tool '{tool_name}' not found."
 
-        tool = self.tools[tool_name]
+            tool = self.tools[tool_name]
 
-        if tool.requires_approval and not auto_approve:
-            print(f"Tool: {tool.name}")
-            print(f"Description: {tool.description}")
-            print(f"Parameters: {kwargs}")
-            approval = input("Do you want to run this tool? (yes/no): ")
-            if approval.lower() != 'yes':
-                return "Tool execution skipped by user."
+            if tool.requires_approval and not auto_approve:
+                print(f"Tool: {tool.name}")
+                print(f"Description: {tool.description}")
+                print(f"Parameters: {kwargs}")
+                approval = input("Do you want to run this tool? (yes/no): ")
+                if approval.lower() != 'yes':
+                    return "Tool execution skipped by user."
 
-        # Dispatch to the correct handler
-        if tool.handler == "api_handler":
-            return self.api_handler(tool, **kwargs)
-        elif tool.handler == "cli_handler":
-            return self.cli_handler(tool, work_dir=work_dir, **kwargs)
-        else:
-            return f"Error: Unknown handler '{tool.handler}' for tool '{tool_name}'."
+            # Dispatch to the correct handler
+            if tool.handler == "api_handler":
+                return self.api_handler(tool, **kwargs)
+            elif tool.handler == "cli_handler":
+                return self.cli_handler(tool, work_dir=work_dir, **kwargs)
+            else:
+                return f"Error: Unknown handler '{tool.handler}' for tool '{tool_name}'."
 
     def api_handler(self, tool, **kwargs):
         import requests # Import here to keep it optional

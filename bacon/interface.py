@@ -14,6 +14,10 @@ class AgentState(TypedDict):
     messages: Annotated[list, operator.add]
     auto_approve: bool
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 class BaconAgent:
     # Python API for the BACON agent
     def __init__(self, config_path: str = "bacon/langgraph_bacon.yaml", recursion_limit: int = 15):
