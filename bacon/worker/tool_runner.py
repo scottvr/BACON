@@ -23,6 +23,7 @@ class ToolRunner:
         return {tool.name: tool for tool in validated_config.tools}
 
     def run_tool(self, tool_name: str, auto_approve: bool = False, work_dir: str = ".", **kwargs):
+
         with tracer.start_as_current_span("run_tool") as span:
             span.set_attribute("tool_name", tool_name)
             if tool_name not in self.tools:
