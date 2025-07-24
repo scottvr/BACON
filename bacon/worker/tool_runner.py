@@ -19,7 +19,7 @@ class ToolRunner:
         # Return a dictionary for easy lookup
         return {tool.name: tool for tool in validated_config.tools}
 
-    def run_tool(self, tool_name: str, auto_approve: bool = False, **kwargs):
+    def run_tool(self, tool_name: str, auto_approve: bool = False, work_dir: str = ".", **kwargs):
         if tool_name not in self.tools:
             return f"Error: Tool '{tool_name}' not found."
 
@@ -37,7 +37,7 @@ class ToolRunner:
         if tool.handler == "api_handler":
             return self.api_handler(tool, **kwargs)
         elif tool.handler == "cli_handler":
-            return self.cli_handler(tool, **kwargs)
+            return self.cli_handler(tool, work_dir=work_dir, **kwargs)
         else:
             return f"Error: Unknown handler '{tool.handler}' for tool '{tool_name}'."
 
@@ -78,14 +78,14 @@ class ToolRunner:
         if not abs_filepath.is_relative_to(abs_work_dir):
             raise ValueError("Filepath traversal detected.")
         
-        return abs_filepath
+        return Path(filepath)
 
-    def cli_handler(self, tool, **kwargs):
+    def cli_handler(self, tool, work_dir, **kwargs):
         command = list(tool.config.command) # Make a copy
         
         # This is a simplified work_dir for now.
         # In a real scenario, this would be the task-specific directory.
-        work_dir = Path("output/runs/current_task").resolve()
+        work_dir = Path(work_dir).resolve()
         work_dir.mkdir(parents=True, exist_ok=True)
 
         for param in tool.config.params:
@@ -106,7 +106,8 @@ class ToolRunner:
                 capture_output=True,
                 text=True,
                 check=True, # Raise exception on non-zero exit code
-                shell=False # CRITICAL for security
+                shell=False, # CRITICAL for security
+                cwd=work_dir.resolve()
             )
             return result.stdout
         except FileNotFoundError:

@@ -46,11 +46,6 @@ class BaconAgent:
             self.workflow.add_edge(edge["from"], edge["to"])
 
         self.workflow.add_conditional_edges(
-            "memory_router",
-            memory_router,
-            {"retriever": "retriever", "worker": "worker"}
-        )
-        self.workflow.add_conditional_edges(
             "feedback_loop",
             lambda state: END if state["messages"][-1] == "halt" else "planner",
             {"planner": "planner", END: END}
