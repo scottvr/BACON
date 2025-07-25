@@ -28,6 +28,10 @@ class BaconAgent:
         self.recursion_limit = recursion_limit
         self._load_graph()
 
+    def _load_prompt(self, prompt_file: str) -> str:
+        with open(prompt_file, "r") as f:
+            return f.read()
+
     def _load_graph(self):
         with open(self.config_path, "r") as f:
             config = yaml.safe_load(f)
@@ -43,6 +47,11 @@ class BaconAgent:
         }
 
         for node in config["nodes"]:
+            if "prompt_file" in node.get("config", {}):
+                prompt = self._load_prompt(node["config"]["prompt_file"])
+                node["config"]["system_prompt"] = prompt
+                del node["config"]["prompt_file"]
+
             func = node_functions.get(node["id"], lambda state: state)
             self.workflow.add_node(node["id"], func)
 

@@ -8,12 +8,8 @@ nodes:
     model: openai:gpt-4
     config:
       temperature: 0.3
-      system_prompt: |
-        You are the Planner in a bicameral cognitive system. Your job is to:
-        - Interpret user goals
-        - Decompose them into subtasks
-        - Select tools or workers for each subtask
-        - React and replan based on environment feedback
+
+      prompt_file: bacon/prompts/planner_prompt.md
     middleware:
       - observability_tracer
 
@@ -53,9 +49,7 @@ nodes:
     inputs: [substrate_sense, retriever]
     config:
       temperature: 0.2
-      system_prompt: |
-        You reflect on the result of the last action and current system state.
-        If the goal is not yet achieved, revise the plan or choose new tools.
+      prompt_file: bacon/prompts/feedback_loop_prompt.md
     middleware:
       - observability_tracer
 
