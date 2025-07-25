@@ -40,12 +40,19 @@ class ToolRunner:
                     return "Tool execution skipped by user."
 
             # Dispatch to the correct handler
+
             if tool.type == "api":
                 return self.api_handler(tool, **kwargs)
             elif tool.type == "cli":
                 return self.cli_handler(tool, work_dir=work_dir, **kwargs)
             elif tool.type == "function":
                 return self.function_handler(tool, **kwargs)
+
+            if tool.handler == "api_handler":
+                return self.api_handler(tool, **kwargs)
+            elif tool.handler == "cli_handler":
+                return self.cli_handler(tool, work_dir=work_dir, **kwargs)
+
             else:
                 return f"Error: Unknown handler '{tool.handler}' for tool '{tool_name}'."
 
