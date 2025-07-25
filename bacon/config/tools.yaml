@@ -1,13 +1,15 @@
 
 tools:
-  - name: "search"
-    description: "Searches the web for a given query using the Tavily API."
-    type: "function"
-    handler: "search"
+  - name: "search_web"
+    description: "Searches the web for a given query using the Brave Search API."
+    type: "api"
+    handler: "api_handler"
     requires_approval: false
     config:
+      api_key_env: "BRAVE_API_KEY"
+      base_url: "https://api.search.brave.com/res/v1/web/search"
       params:
-        - name: "query"
+        - name: "q"
           type: "string"
           required: true
 
@@ -35,5 +37,30 @@ tools:
           type: "filepath"
           required: true
         - name: "content"
+          type: "string"
+          required: true
+
+  - name: "save_to_memory"
+    description: "Saves a document to the vector store."
+    type: "function"
+    handler: "save_to_memory"
+    requires_approval: false
+    config:
+      params:
+        - name: "document"
+          type: "string"
+          required: true
+        - name: "metadata"
+          type: "dict"
+          required: false
+
+  - name: "retriever"
+    description: "Retrieves information from the vector store."
+    type: "function"
+    handler: "retriever"
+    requires_approval: false
+    config:
+      params:
+        - name: "query"
           type: "string"
           required: true

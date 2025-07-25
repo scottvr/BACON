@@ -4,6 +4,9 @@ import os
 import subprocess
 from pathlib import Path
 from bacon.worker.tool_defs import ToolsConfig
+from opentelemetry import trace
+
+tracer = trace.get_tracer(__name__)
 
 class ToolRunner:
     def __init__(self, tool_config_path: str = "bacon/config/tools.yaml"):
@@ -19,29 +22,32 @@ class ToolRunner:
         # Return a dictionary for easy lookup
         return {tool.name: tool for tool in validated_config.tools}
 
-    def run_tool(self, tool_name: str, auto_approve: bool = False, **kwargs):
-        if tool_name not in self.tools:
-            return f"Error: Tool '{tool_name}' not found."
+    def run_tool(self, tool_name: str, auto_approve: bool = False, work_dir: str = ".", **kwargs):
 
-        tool = self.tools[tool_name]
+        with tracer.start_as_current_span("run_tool") as span:
+            span.set_attribute("tool_name", tool_name)
+            if tool_name not in self.tools:
+                return f"Error: Tool '{tool_name}' not found."
 
-        if tool.requires_approval and not auto_approve:
-            print(f"Tool: {tool.name}")
-            print(f"Description: {tool.description}")
-            print(f"Parameters: {kwargs}")
-            approval = input("Do you want to run this tool? (yes/no): ")
-            if approval.lower() != 'yes':
-                return "Tool execution skipped by user."
+            tool = self.tools[tool_name]
 
-        # Dispatch to the correct handler
-        if tool.type == "api":
-            return self.api_handler(tool, **kwargs)
-        elif tool.type == "cli":
-            return self.cli_handler(tool, work_dir=work_dir, **kwargs)
-        elif tool.type == "function":
-            return self.function_handler(tool, **kwargs)
-        else:
-            return f"Error: Unknown handler '{tool.handler}' for tool '{tool_name}'."
+            if tool.requires_approval and not auto_approve:
+                print(f"Tool: {tool.name}")
+                print(f"Description: {tool.description}")
+                print(f"Parameters: {kwargs}")
+                approval = input("Do you want to run this tool? (yes/no): ")
+                if approval.lower() != 'yes':
+                    return "Tool execution skipped by user."
+
+            # Dispatch to the correct handler
+            if tool.type == "api":
+                return self.api_handler(tool, **kwargs)
+            elif tool.type == "cli":
+                return self.cli_handler(tool, work_dir=work_dir, **kwargs)
+            elif tool.type == "function":
+                return self.function_handler(tool, **kwargs)
+            else:
+                return f"Error: Unknown handler '{tool.handler}' for tool '{tool_name}'."
 
     def api_handler(self, tool, **kwargs):
         import requests # Import here to keep it optional
@@ -80,14 +86,14 @@ class ToolRunner:
         if not abs_filepath.is_relative_to(abs_work_dir):
             raise ValueError("Filepath traversal detected.")
         
-        return abs_filepath
+        return Path(filepath)
 
-    def cli_handler(self, tool, **kwargs):
+    def cli_handler(self, tool, work_dir, **kwargs):
         command = list(tool.config.command) # Make a copy
         
         # This is a simplified work_dir for now.
         # In a real scenario, this would be the task-specific directory.
-        work_dir = Path("output/runs/current_task").resolve()
+        work_dir = Path(work_dir).resolve()
         work_dir.mkdir(parents=True, exist_ok=True)
 
         for param in tool.config.params:
@@ -108,7 +114,8 @@ class ToolRunner:
                 capture_output=True,
                 text=True,
                 check=True, # Raise exception on non-zero exit code
-                shell=False # CRITICAL for security
+                shell=False, # CRITICAL for security
+                cwd=work_dir.resolve()
             )
             return result.stdout
         except FileNotFoundError:

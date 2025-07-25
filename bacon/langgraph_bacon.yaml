@@ -17,29 +17,6 @@ nodes:
     middleware:
       - observability_tracer
 
-  - id: memory_router
-    type: router
-    description: Context and memory dispatcher
-    inputs: [planner]
-    routes:
-      - condition: "task involves prior knowledge or examples"
-        target: retriever
-      - condition: "task is new"
-        target: worker
-    middleware:
-      - observability_tracer
-
-  - id: retriever
-    type: function
-    description: VectorDB-backed retrieval for RAG memory
-    inputs: [memory_router]
-    function: retrieve_context
-    config:
-      db: chroma
-      embedding_model: openai:embedding-ada-002
-    middleware:
-      - observability_tracer
-
   - id: substrate_sense
     type: function
     description: Runtime awareness of system resource limits
@@ -91,15 +68,9 @@ nodes:
 
 edges:
   - from: planner
-    to: memory_router
-  - from: memory_router
-    to: retriever
-  - from: memory_router
     to: worker
   - from: worker
     to: substrate_sense
-  - from: retriever
-    to: worker
   - from: substrate_sense
     to: feedback_loop
 

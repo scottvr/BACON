@@ -37,7 +37,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [x] Modular orchestration layer (LangGraph or custom)
 - [ ] Tool execution layer (CLI, Python, APIs)
 - [ ] Substrate feedback (psutil, Prometheus, etc.)
-- [ ] Long-term memory (vector DB or document store)
+- [x] Long-term memory (vector DB or document store)
 - [x] Working memory / context (chat + task memory)
 - [x] JSON/YAML agent flow config
 - [ ] Prompt-driven agent self-reflection and replanning
@@ -78,13 +78,13 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [x] Approval mechanism for tool execution (e.g., "Do you want to run this code?") In a tool's definition (tools.yaml), add a flag like requires_approval: true.. When the agent wants to use such a tool (e.g., execute_code, spend_money), it pauses and waits for user confirmation via the CLI. 
 - [x] Code Executor sandboxing (Docker container for code_executor.py)
 - [ ] Implement code synthesis with subprocess feedback
-- [x] Add working memory (in-memory context history)
+- [ ] Add working memory (in-memory context history)
 
 ### Phase 2: Substrate Awareness
-- [ ] Add system metric polling (RAM, CPU, disk, GPU if available)
-- [ ] Feed metrics into planning decisions
-- [ ] Allow Executive to adapt plan based on constraints
-- [ ] Integrate observability via LangSmith traces and OpenTelemetry metrics for substrate and tool feedback
+- [x] Add system metric polling (RAM, CPU, disk, GPU if available)
+- [x] Feed metrics into planning decisions
+- [x] Allow Executive to adapt plan based on constraints
+- [x] Integrate observability via LangSmith traces and OpenTelemetry metrics for substrate and tool feedback
 - [ ] The agent should track the cost of its LLM calls (input_tokens * price + output_tokens * price).
 - [ ] A task can be given a max_budget constraint (e.g., constraints={"RAM": "8GB", "budget": "$5.00"}).
 - [ ] The Executive planner should be aware of the remaining context window size and use summarization or context compression techniques to avoid failures on long-running tasks.
@@ -96,7 +96,7 @@ Existing LLM agents are monolithic or brittle. They lack:
 - [ ] Track Prompt strategy variants(e.g., executive tone, persona conditioning)
 - [ ] Track model-specific tuning quirks
 - [ ] Memory slotting/Recall strategies (e.g., by task type, tool used, or outcome)
-- [ ] snapshot the entire state of the LangGraph execution graph, not just the memory.
+- [x] snapshot the entire state of the LangGraph execution graph, not just the memory.
 After each step, save the current state (including all node inputs/outputs, memory, and the current position in the graph) to a database like SQLite or a file.
 When the agent starts, it can check for an incomplete run and offer to resume from the last saved state. This makes the system resilient to failures.
 

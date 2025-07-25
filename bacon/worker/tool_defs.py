@@ -4,7 +4,7 @@ from typing import List, Optional, Literal
 
 class ToolParameter(BaseModel):
     name: str
-    type: Literal["string", "filepath", "integer", "boolean"]
+    type: Literal["string", "filepath", "integer", "boolean", "dict"]
     required: bool = True
     description: Optional[str] = None
 

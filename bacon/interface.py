@@ -7,12 +7,18 @@ from bacon.exec.planner import planner
 from bacon.worker.worker import worker
 from bacon.exec.feedback_loop import feedback_loop
 from bacon.exec.memory_router import memory_router
-from bacon.memory.retriever import retriever
+from bacon.worker.tools.retriever import retriever
 from bacon.substrate.substrate_sense import substrate_sense
 
 class AgentState(TypedDict):
     messages: Annotated[list, operator.add]
     auto_approve: bool
+
+from dotenv import load_dotenv
+from bacon.memory.snapshot import save_snapshot, load_snapshot
+from pathlib import Path
+
+load_dotenv()
 
 class BaconAgent:
     # Python API for the BACON agent
@@ -46,25 +52,26 @@ class BaconAgent:
             self.workflow.add_edge(edge["from"], edge["to"])
 
         self.workflow.add_conditional_edges(
-            "memory_router",
-            memory_router,
-            {"retriever": "retriever", "worker": "worker"}
-        )
-        self.workflow.add_conditional_edges(
             "feedback_loop",
-            lambda state: END if state["messages"][-1] == "halt" else "planner",
-            {"planner": "planner", END: END}
+            lambda state: END,
+            {END: END}
         )
 
         self.graph = self.workflow.compile()
 
     def run(self, task: str, constraints: dict = None, auto_approve: bool = False) -> AgentState:
         # Execute the agent on a given task and return the final state
-        initial_messages = [f"task: {task}"]
-        if constraints:
-            for k, v in constraints.items():
-                initial_messages.append(f"{k}: {v}")
+        snapshot_path = Path("bacon_snapshot.pkl")
+        if snapshot_path.exists():
+            initial_state = load_snapshot(snapshot_path)
+            print("Resuming from snapshot.")
+        else:
+            initial_messages = [f"task: {task}"]
+            if constraints:
+                for k, v in constraints.items():
+                    initial_messages.append(f"{k}: {v}")
+            initial_state = {"messages": initial_messages, "auto_approve": auto_approve}
 
-        initial_state = {"messages": initial_messages, "auto_approve": auto_approve}
         final_state = self.graph.invoke(initial_state, {"recursion_limit": self.recursion_limit})
+        print(f"Final state: {final_state}")
         return final_state
