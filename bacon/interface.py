@@ -7,7 +7,7 @@ from bacon.exec.planner import planner
 from bacon.worker.worker import worker
 from bacon.exec.feedback_loop import feedback_loop
 from bacon.exec.memory_router import memory_router
-from bacon.memory.retriever import retriever
+from bacon.worker.tools.retriever import retriever
 from bacon.substrate.substrate_sense import substrate_sense
 
 class AgentState(TypedDict):
@@ -15,6 +15,9 @@ class AgentState(TypedDict):
     auto_approve: bool
 
 from dotenv import load_dotenv
+
+from bacon.memory.snapshot import save_snapshot, load_snapshot
+from pathlib import Path
 
 load_dotenv()
 
@@ -59,11 +62,17 @@ class BaconAgent:
 
     def run(self, task: str, constraints: dict = None, auto_approve: bool = False) -> AgentState:
         # Execute the agent on a given task and return the final state
-        initial_messages = [f"task: {task}"]
-        if constraints:
-            for k, v in constraints.items():
-                initial_messages.append(f"{k}: {v}")
+        snapshot_path = Path("bacon_snapshot.pkl")
+        if snapshot_path.exists():
+            initial_state = load_snapshot(snapshot_path)
+            print("Resuming from snapshot.")
+        else:
+            initial_messages = [f"task: {task}"]
+            if constraints:
+                for k, v in constraints.items():
+                    initial_messages.append(f"{k}: {v}")
+            initial_state = {"messages": initial_messages, "auto_approve": auto_approve}
 
-        initial_state = {"messages": initial_messages, "auto_approve": auto_approve}
         final_state = self.graph.invoke(initial_state, {"recursion_limit": self.recursion_limit})
+        print(f"Final state: {final_state}")
         return final_state

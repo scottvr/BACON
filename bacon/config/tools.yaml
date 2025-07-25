@@ -39,3 +39,28 @@ tools:
         - name: "content"
           type: "string"
           required: true
+
+  - name: "save_to_memory"
+    description: "Saves a document to the vector store."
+    type: "function"
+    handler: "save_to_memory"
+    requires_approval: false
+    config:
+      params:
+        - name: "document"
+          type: "string"
+          required: true
+        - name: "metadata"
+          type: "dict"
+          required: false
+
+  - name: "retriever"
+    description: "Retrieves information from the vector store."
+    type: "function"
+    handler: "retriever"
+    requires_approval: false
+    config:
+      params:
+        - name: "query"
+          type: "string"
+          required: true

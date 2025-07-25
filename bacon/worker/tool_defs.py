@@ -4,7 +4,7 @@ from typing import List, Optional, Literal
 
 class ToolParameter(BaseModel):
     name: str
-    type: Literal["string", "filepath", "integer", "boolean"]
+    type: Literal["string", "filepath", "integer", "boolean", "dict"]
     required: bool = True
     description: Optional[str] = None
 
@@ -17,8 +17,8 @@ class ToolConfig(BaseModel):
 class ToolDefinition(BaseModel):
     name: str
     description: str
-    type: Literal["api", "cli"]
-    handler: Literal["api_handler", "cli_handler"]
+    type: Literal["api", "cli", "function"]
+    handler: str
     requires_approval: bool = False
     config: ToolConfig
 
