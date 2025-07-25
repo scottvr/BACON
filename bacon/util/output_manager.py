@@ -22,7 +22,10 @@ class OutputManager:
     def save_messages(self, task_dir: Path, messages: list):
         with open(task_dir / "messages.txt", "w") as f:
             for msg in messages:
-                f.write(msg + "\n")
+                if isinstance(msg, dict):
+                    f.write(str(msg) + "\n")
+                else:
+                    f.write(msg + "\n")
 
     def save_summary(self, task_dir: Path, summary: Dict):
         with open(task_dir / "summary.json", "w") as f:
