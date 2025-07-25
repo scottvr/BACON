@@ -292,6 +292,6 @@ Dynomight’s “Limits of Smart” is a valuable corrective: a reminder that in
 
 BACON is an attempt to formalize that shift. Not a pipe dream, not a manifesto — a blueprint. It doesn’t need new physics or divine inspiration. It just needs modular cognition, infrastructure awareness, and a runtime that can reason about itself. Much of it is already here. The rest can be built.
 
-So no, the future won’t be summoned by a single monolithic model hoarding IQ points in a vacuum. It will emerge from toolchains, feedback loops, shell scripts, schedulers, semantic graphs, and little acts of architectural stubbornness.
+So no, the future won’t be summoned by a single monolithic model hoarding IQ points in a vacuum. It will emerge from toolchains, feedback loops, shell scripts, schedulers, semantic graphs, and whatever is coming next.
 
 We don’t need to wait for godlike intelligence to descend from the heavens. We can boot it — one piece of BACON at a time.
