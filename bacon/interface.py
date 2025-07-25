@@ -18,8 +18,6 @@ from dotenv import load_dotenv
 
 from bacon.memory.snapshot import save_snapshot, load_snapshot
 from pathlib import Path
-from bacon.memory.snapshot import save_snapshot, load_snapshot
-from pathlib import Path
 
 load_dotenv()
 

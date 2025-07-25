@@ -1,7 +1,8 @@
 from bacon.memory.vector_store import VectorStore
 import uuid
 
-def save_to_memory(document: str, metadata: dict = None):
+
+def save_to_memory(document: str, metadata: dict = {}):
     """
     Saves a document to the vector store.
     """
