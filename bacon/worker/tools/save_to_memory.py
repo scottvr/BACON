@@ -1,6 +1,7 @@
 from bacon.memory.vector_store import VectorStore
 import uuid
 
+
 def save_to_memory(document: str, metadata: dict = {}):
     """
     Saves a document to the vector store.
@@ -8,7 +9,7 @@ def save_to_memory(document: str, metadata: dict = {}):
     vector_store = VectorStore()
     vector_store.add(
         documents=[document],
-        metadatas=[metadata],
+        metadatas=[metadata] if metadata else [{}],
         ids=[str(uuid.uuid4())]
     )
     return "Document saved to memory."
