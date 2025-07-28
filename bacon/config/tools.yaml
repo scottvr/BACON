@@ -1,41 +1,47 @@
-
 tools:
-  - name: "search_web"
-    description: "Searches the web for a given query using the Brave Search API."
-    type: "api"
-    handler: "api_handler"
-    requires_approval: false
-    config:
-      api_key_env: "BRAVE_API_KEY"
-      base_url: "https://api.search.brave.com/res/v1/web/search"
-      params:
-        - name: "q"
+  - type: "function"
+    function:
+      name: "search"
+      description: "Searches the web for a given query using the Tavily API."
+      parameters:
+        query:
           type: "string"
-          required: true
-
-  - name: "read_file"
-    description: "Reads the content of a file from the current working directory."
-    type: "cli"
-    handler: "cli_handler"
-    requires_approval: true
-    config:
-      command: ["cat"]
-      params:
-        - name: "filename"
-          type: "filepath"
-          required: true
-
-  - name: "write_file"
-    description: "Writes content to a file in the current working directory."
-    type: "cli"
-    handler: "cli_handler"
-    requires_approval: true
-    config:
-      command: ["tee"]
-      params:
-        - name: "filename"
-          type: "filepath"
-          required: true
-        - name: "content"
+          description: "The search query."
+  - type: "function"
+    function:
+      name: "read_file"
+      description: "Reads the content of a file from the current working directory."
+      parameters:
+        filename:
           type: "string"
-          required: true
+          description: "The name of the file to read."
+  - type: "function"
+    function:
+      name: "write_file"
+      description: "Writes content to a file in the current working directory."
+      parameters:
+        filename:
+          type: "string"
+          description: "The name of the file to write to."
+        content:
+          type: "string"
+          description: "The content to write to the file."
+  - type: "function"
+    function:
+      name: "save_to_memory"
+      description: "Saves a document to the vector store."
+      parameters:
+        document:
+          type: "string"
+          description: "The document to save."
+        metadata:
+          type: "object"
+          description: "The metadata for the document."
+  - type: "function"
+    function:
+      name: "retriever"
+      description: "Retrieves information from the vector store."
+      parameters:
+        query:
+          type: "string"
+          description: "The query to search for."

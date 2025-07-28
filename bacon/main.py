@@ -1,4 +1,7 @@
 import argparse
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from bacon.interface import BaconAgent
 from bacon.util.output_manager import OutputManager
 
@@ -15,7 +18,7 @@ def main():
     result = agent.run(
         args.task, 
         auto_approve=args.auto_approve,
-        constraints={"work_dir": args.work_dir}
+        constraints={"work_dir": "output/runs/current_task"}
     )
 
     output_mgr = OutputManager()

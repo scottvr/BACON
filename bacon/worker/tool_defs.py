@@ -1,26 +1,19 @@
-
 from pydantic import BaseModel, Field
-from typing import List, Optional, Literal
+from typing import List, Optional, Union, Literal
 
-class ToolParameter(BaseModel):
-    name: str
-    type: Literal["string", "filepath", "integer", "boolean"]
-    required: bool = True
+class FunctionParameter(BaseModel):
+    type: str
     description: Optional[str] = None
+    enum: Optional[List[str]] = None
 
-class ToolConfig(BaseModel):
-    api_key_env: Optional[str] = None
-    base_url: Optional[str] = None
-    command: Optional[List[str]] = None
-    params: List[ToolParameter] = []
-
-class ToolDefinition(BaseModel):
+class FunctionDefinition(BaseModel):
     name: str
     description: str
-    type: Literal["api", "cli"]
-    handler: Literal["api_handler", "cli_handler"]
-    requires_approval: bool = False
-    config: ToolConfig
+    parameters: dict[str, FunctionParameter]
+
+class ToolDefinition(BaseModel):
+    type: Literal["function"]
+    function: FunctionDefinition
 
 class ToolsConfig(BaseModel):
     tools: List[ToolDefinition]
