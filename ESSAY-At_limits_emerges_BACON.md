@@ -3,7 +3,7 @@
 by ScottVR (Scott VanRavenswaay)
 10 min read
 
-Recently I read an interesting article called [“The Limits of Smart”, by Dynomight.](https://dynomight.net/smart) In it, Dynomight imagines a being orders of magnitude smarter and faster than any human, then explores whether such a mind could instantly solve problems in fields like math, biology, physics, art, and politics. The article argues that raw intelligence alone wouldn’t be enough — because many real-world challenges are bottlenecked not by thought, but by access to physical infrastructure, experimental data, chaotic systems, and human irrationality. He doesn’t explicitly say he’s talking about AGI here, and doesn’t start talking about AI Superintelligence until after making points about what he thinks the “Being” (as he refers to it in his thought experiment) could and could not do and sums up his thought experiement with these five themes:
+Recently I read an interesting article called ["The Limits of Smart", by Dynomight.](https://dynomight.net/smart) In it, Dynomight imagines a being orders of magnitude smarter and faster than any human, then explores whether such a mind could instantly solve problems in fields like math, biology, physics, art, and politics. The article argues that raw intelligence alone wouldn’t be enough — because many real-world challenges are bottlenecked not by thought, but by access to physical infrastructure, experimental data, chaotic systems, and human irrationality. He doesn’t explicitly say he’s talking about AGI here, and doesn’t start talking about AI Superintelligence until after making points about what he thinks the "Being" (as he refers to it in his thought experiment) could and could not do and sums up his thought experiement with these five themes:
 
 >1. To do many things requires new fundamental knowledge (e.g. the results of physical experiments, how molecular biology works). The Being might eventually be able to acquire this knowledge, but it wouldn’t happen automatically because it requires physical experiments.
 >2. To do other things requires situational knowledge (e.g. the voting intentions of millions of people, the temperature and humidify at every position in Earth’s atmosphere, which particular cells in your body have become cancerous as a result of what mutations). Getting this knowledge requires creating and maintaining a complex infrastructure.
@@ -18,13 +18,13 @@ I enjoyed reading the article and was prompted to want to comment on it and left
 > 
 >If the Being is digital, why assume it is limited to the same tools and access as a human? That’s a philosophical convenience, not a technical constraint. Even today, we’re watching early LLM-based agents perform recursive tool use, call APIs, write and run code, and interact with infrastructure. In that light, the “Being” wouldn’t just think, it would act — and act through its environment.
 > 
->At the very least, this is “tool use.” At a higher level, it starts to look like cognition integrated with system control: bicameral or modular architectures where one part plans and reasons, while others carry out low-level execution, observation, or even hardware manipulation.
+>At the very least, this is "tool use." At a higher level, it starts to look like cognition integrated with system control: bicameral or modular architectures where one part plans and reasons, while others carry out low-level execution, observation, or even hardware manipulation.
 > 
 >This opens the door to a Being that self-improves, self-instruments, and restructures its compute context over time. Not necessarily instantly — but it’s not inert, either. If intelligence includes the ability to manipulate its own substrate, then the limiting factor isn’t intelligence per se, but how tightly it’s coupled to the infrastructure it’s running on.
 > 
 >In that light, a more provocative question might be:
 > 
->“What architectures would let such a Being close the loop between thought and action faster than we expect?”
+>"What architectures would let such a Being close the loop between thought and action faster than we expect?"
 
 So with ithe realization that nobody was going to read or respond to my comment, I was left to ponder the question I closed with myself. What’s more is that if I am commenting on intelligence (or more often, emergent consciousness) and substrate, I am usually explicitly suggesting that the intelligence and the substrate be decoupled. But here I was pondering the current state of machine learning Inference Machines (partcularly, LLMs such as ChatGPT, Claude, Gemini, Grok) and suggesting that we might want to consider this ASI along with its substrate — its infrastructure — to see how it might overcome the obstacles to god-like powers being that it is *not* a human with a 300 IQ we are postulating, but a machine running on compute clusters. Worse, I still had a comment in the chamber for Dynomight’s answer to a question posed in his article:
 
@@ -38,9 +38,9 @@ What I wanted to say to this is that persuasion isn’t about logic, but identit
 
 Think: memetic steering + influence ops at scale. In that frame, persuasion becomes a matter of architecture, not argument. This raises the specter of soft-power AGI manipulation.
 
-Anyhow, the “Limits of Smart” essay cleverly undercuts naive AGI optimism without being reactionary or anti-AI. It reframes superintelligence not as omnipotence, but as frustrated capability — inhibited by matter, noise, and the pace of meatspace.
+Anyhow, the "Limits of Smart" essay cleverly undercuts naive AGI optimism without being reactionary or anti-AI. It reframes superintelligence not as omnipotence, but as frustrated capability — inhibited by matter, noise, and the pace of meatspace.
 
-It’s ultimately a systems-level take. Dynomight writes “can we please for the love of god keep our critical systems simple and isolated from the internet?” and “Maybe the first-order consequences wouldn’t be that big?” Admittedly I point this out as an excuse to link to my recent paper on [Unaware Adversaries](https://www.paperclipmaximizer.ai/Unaware_Adversaries.pdf)  , i and frame it in that light: intelligence — no matter how great — still runs into the stubborn friction of complex, decentralized systems.
+It’s ultimately a systems-level take. Dynomight writes “can we please for the love of god keep our critical systems simple and isolated from the internet?” and "Maybe the first-order consequences wouldn’t be that big?" Admittedly I point this out as an excuse to link to my recent paper on [Unaware Adversaries](https://www.paperclipmaximizer.ai/Unaware_Adversaries.pdf), and frame it in that light: intelligence — no matter how great — still runs into the stubborn friction of complex, decentralized systems.
 
 So, it’s not about what the Being could know. It’s about what the world *lets it do.*
 
