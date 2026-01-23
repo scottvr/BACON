@@ -3,7 +3,7 @@
 by ScottVR (Scott VanRavenswaay)
 10 min read
 
-Recently I read an interesting article called ["The Limits of Smart", by Dynomight.](https://dynomight.net/smart) In it, Dynomight imagines a being orders of magnitude smarter and faster than any human, then explores whether such a mind could instantly solve problems in fields like math, biology, physics, art, and politics. The article argues that raw intelligence alone wouldn’t be enough — because many real-world challenges are bottlenecked not by thought, but by access to physical infrastructure, experimental data, chaotic systems, and human irrationality. He doesn’t explicitly say he’s talking about AGI here, and doesn’t start talking about AI Superintelligence until after making points about what he thinks the "Being" (as he refers to it in his thought experiment) could and could not do and sums up his thought experiement with these five themes:
+Recently I read an interesting article called ["The Limits of Smart", by Dynomight.](https://dynomight.net/smart) In it, Dynomight imagines a being orders of magnitude smarter and faster than any human, then explores whether such a mind could instantly solve problems in fields like math, biology, physics, art, and politics. The article argues that raw intelligence alone wouldn’t be enough, because many real-world challenges are bottlenecked not by thought, but by access to physical infrastructure, experimental data, chaotic systems, and human irrationality. He doesn’t explicitly say he’s talking about AGI here, and doesn’t start talking about AI Superintelligence until after making points about what he thinks the "Being" (as he refers to it in his thought experiment) could and could not do and sums up his thought experiement with these five themes:
 
 >1. To do many things requires new fundamental knowledge (e.g. the results of physical experiments, how molecular biology works). The Being might eventually be able to acquire this knowledge, but it wouldn’t happen automatically because it requires physical experiments.
 >2. To do other things requires situational knowledge (e.g. the voting intentions of millions of people, the temperature and humidify at every position in Earth’s atmosphere, which particular cells in your body have become cancerous as a result of what mutations). Getting this knowledge requires creating and maintaining a complex infrastructure.
@@ -295,4 +295,5 @@ BACON is an attempt to formalize that shift. Not a pipe dream, but a blueprint. 
 So no, the future won’t be summoned by a single monolithic model hoarding IQ points in a vacuum. It will emerge from toolchains, feedback loops, shell scripts, schedulers, semantic graphs, and whatever is coming next.
 
 We don’t need to wait for godlike intelligence to descend from the heavens; we can boot it — one piece of BACON at a time.
+
 
