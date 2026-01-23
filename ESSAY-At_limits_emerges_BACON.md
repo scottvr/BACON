@@ -290,8 +290,9 @@ Constraints: Max RAM usage of 7GB, completion within 30 minutes.
 
 Dynomight’s “Limits of Smart” is a valuable corrective: a reminder that intelligence alone doesn’t lift atoms, decode genomes, or persuade nations. But intelligence plus architecture just might. Once you stop imagining the Being as a floating brain in a box and start designing it as a system with arms, legs, memory, and I/O — the conversation shifts from “what if” to “how soon.”
 
-BACON is an attempt to formalize that shift. Not a pipe dream, not a manifesto — a blueprint. It doesn’t need new physics or divine inspiration. It just needs modular cognition, infrastructure awareness, and a runtime that can reason about itself. Much of it is already here. The rest can be built.
+BACON is an attempt to formalize that shift. Not a pipe dream, but a blueprint. It doesn’t need new physics or divine inspiration - it just needs modular cognition, infrastructure awareness, and a runtime that can reason about itself. Much of it is already here, and the rest can be built.
 
 So no, the future won’t be summoned by a single monolithic model hoarding IQ points in a vacuum. It will emerge from toolchains, feedback loops, shell scripts, schedulers, semantic graphs, and whatever is coming next.
 
-We don’t need to wait for godlike intelligence to descend from the heavens. We can boot it — one piece of BACON at a time.
+We don’t need to wait for godlike intelligence to descend from the heavens; we can boot it — one piece of BACON at a time.
+
